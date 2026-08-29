@@ -22,3 +22,7 @@ land_use <- Inputs_LandUse_E_Americas %>%
 # Create agricultural holdings table, focusing on gender dynamics
 holdings <- World_Census_Agriculture_E_Americas %>%
   filter(grepl("male", Item, ignore.case = TRUE))
+
+# Create SDG table
+SDG <- SDG_BulkDownloads_E_Americas %>%
+  filter(grepl("Barbados", Area, ignore.case = TRUE))
