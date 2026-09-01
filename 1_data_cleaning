@@ -1,0 +1,90 @@
+library(readr)
+library(tidyverse)
+
+# ============================================================
+# Livestock Population
+# ============================================================
+
+livestock_ptn <- read_csv(
+  "Data/Livestock_patterns/FAOSTAT_data_en_8-29-2026.csv"
+)
+
+livestock_area <- read_csv(
+  "Data/Livestock_patterns/FAOSTAT_data_8-29-2026.csv"
+)
+
+# Extract region codes
+region_codes <- livestock_area %>%
+  distinct(`Group M49 Code`) %>%
+  pull(`Group M49 Code`)
+
+# Region data
+livestock_region <- livestock_ptn %>%
+  filter(`Area Code (M49)` %in% region_codes)
+
+# Country data
+livestock_country <- livestock_ptn %>%
+  filter(!`Area Code (M49)` %in% region_codes)
+
+# Export
+write_csv(
+  livestock_region,
+  "Data/Livestock_patterns/livestock_region.csv"
+)
+
+write_csv(
+  livestock_country,
+  "Data/Livestock_patterns/livestock_country.csv"
+)
+
+
+# ============================================================
+# Livestock Production
+# ============================================================
+
+Production_13 <- read_csv(
+  "Data/Livestock_production/FAOSTAT_data_en_8-31-2026_13.csv"
+)
+
+Production_14_17 <- read_csv(
+  "Data/Livestock_production/FAOSTAT_data_en_8-31-2026_14_17.csv"
+)
+
+Production_18_21 <- read_csv(
+  "Data/Livestock_production/FAOSTAT_data_en_8-31-2026_18_21.csv"
+)
+
+Production_22_24 <- read_csv(
+  "Data/Livestock_production/FAOSTAT_data_en_8-31-2026_22_24.csv"
+)
+
+Production_region_code <- read_csv(
+  "Data/Livestock_production/FAOSTAT_data_8-31-2026_coutry_region.csv"
+)
+
+# Append production files
+livestock_production <- bind_rows(
+  Production_13,
+  Production_14_17,
+  Production_18_21,
+  Production_22_24
+)
+
+# Extract region codes
+production_region_dt <- Production_region_code %>%
+  distinct(`Group M49 Code`) %>%
+  pull(`Group M49 Code`)
+
+# Region data
+production_region <- livestock_production %>%
+  filter(`Area Code (M49)` %in% production_region_dt)
+
+# Country data
+production_country <- livestock_production %>%
+  filter(!`Area Code (M49)` %in% production_region_dt)
+
+# Export
+write_csv(
+  production_country,
+  "Data/Livestock_production/production_country.csv"
+)
