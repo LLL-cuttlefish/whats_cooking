@@ -1,6 +1,53 @@
 table 'Measures (2)'
 	lineageTag: 9e1c1992-2c09-4428-9d34-d146a2c6e212
 
+	measure 'Total Biogas Yield (m3)' = ```
+			
+			SUMX(
+			    livestock,
+			    VAR CurrentItem = livestock[Item]
+			    VAR DailyManure = 
+			        LOOKUPVALUE(
+			            manure[Daily_Manure_kg],
+			            manure[animal_type], 
+			            CurrentItem
+			        )
+			    VAR YieldPerKg = 
+			        LOOKUPVALUE(
+			            manure[Biogas_Yield_m3_kg],
+			            manure[animal_type], 
+			            CurrentItem
+			        )
+			    RETURN
+			        livestock[Head_Count] * DailyManure * 365 * YieldPerKg
+			)
+			```
+		lineageTag: a87d9122-71fa-487b-836e-ac61eae36243
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Energy Potential (kWh)' =
+			
+			[Total Biogas Yield (m3)] * 6.0
+		lineageTag: 75c98cb1-fb49-4707-a779-395c683cd820
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Energy Output (10% Model)' = [Gross Energy Potential (kWh)] * 0.10
+		lineageTag: 309b0b93-301b-4e93-8cef-be9ec224b2f6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Energy Output (20% Model)' = [Gross Energy Potential (kWh)] * 0.20
+		lineageTag: 644ddf5d-d501-4fe8-ae01-3638e7ca3052
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Energy Output (30% Model)' = [Gross Energy Potential (kWh)] * 0.30
+		lineageTag: ad254050-5b29-4b92-a30c-e98618363fef
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column Measures
 		dataType: string
 		lineageTag: 5b4f40eb-d82f-46e4-b1a4-476ddcbca555

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "52c88023c0051bd128b5",
+  "name": "3f66b78a25ae6c06d598",
   "position": {
     "x": 31.285750657727235,
     "y": 505.20693654700273,
-    "z": 3,
+    "z": 12,
     "height": 126.30173413675068,
     "width": 142.52397521853518,
-    "tabOrder": 3
+    "tabOrder": 11
   },
   "visual": {
     "visualType": "image",
@@ -29,7 +29,7 @@
                     "ResourcePackageItem": {
                       "PackageName": "RegisteredResources",
                       "PackageType": 1,
-                      "ItemName": "noun_Goat_8150859_@7007478362666310385.png"
+                      "ItemName": "noun_Goat_8150859_@70004771196164977509.png"
                     }
                   }
                 },

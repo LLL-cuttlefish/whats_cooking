@@ -30,7 +30,7 @@ table countries
 	column Cattle_LSU
 		dataType: double
 		lineageTag: bdcba341-337b-4bf7-bdad-34554345eef1
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Cattle_LSU
 
 		annotation SummarizationSetBy = Automatic
@@ -40,7 +40,7 @@ table countries
 	column Sheep_LSU
 		dataType: double
 		lineageTag: 90d4c30d-32ac-4d26-be84-266fab10d227
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Sheep_LSU
 
 		annotation SummarizationSetBy = Automatic
@@ -50,7 +50,7 @@ table countries
 	column Goats_LSU
 		dataType: double
 		lineageTag: fd9ed4bd-733c-4bbd-8957-96d57142e366
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Goats_LSU
 
 		annotation SummarizationSetBy = Automatic
@@ -60,7 +60,7 @@ table countries
 	column Chickens_LSU
 		dataType: double
 		lineageTag: f845f5bc-72d6-42ce-8473-174417e027be
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Chickens_LSU
 
 		annotation SummarizationSetBy = Automatic
@@ -84,10 +84,9 @@ table countries
 				    #"Merged Queries1" = Table.NestedJoin(#"Expanded lsu_country", {"lsu_country.LSU_region_equivalent"}, LSU_region, {"Region"}, "LSU_region", JoinKind.LeftOuter),
 				    #"Expanded LSU_region" = Table.ExpandTableColumn(#"Merged Queries1", "LSU_region", {"Cattle_LSU", "Sheep_LSU", "Goats_LSU", "Chickens_LSU"}, {"Cattle_LSU", "Sheep_LSU", "Goats_LSU", "Chickens_LSU"}),
 				    #"Renamed Columns1" = Table.RenameColumns(#"Expanded LSU_region",{{"lsu_country.LSU_region_equivalent", "LSU Region Equivalent"}}),
-				    #"Sorted Rows" = Table.Sort(#"Renamed Columns1",{{"Area", Order.Ascending}}),
-				    #"Filtered Rows" = Table.SelectRows(#"Sorted Rows", each ([Area] = "China" or [Area] = "China, Hong Kong SAR" or [Area] = "China, Macao SAR" or [Area] = "China, mainland" or [Area] = "China, Taiwan Province of"))
+				    #"Sorted Rows" = Table.Sort(#"Renamed Columns1",{{"Area", Order.Ascending}})
 				in
-				    #"Filtered Rows"
+				    #"Sorted Rows"
 
 	annotation PBI_NavigationStepName = Navigation
 

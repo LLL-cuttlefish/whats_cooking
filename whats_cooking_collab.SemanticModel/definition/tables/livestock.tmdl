@@ -114,6 +114,33 @@ table livestock
 
 		annotation SummarizationSetBy = Automatic
 
+	column Head_Count = ```
+			
+			VAR CurrentAnimal = livestock[Item]
+			VAR LSU_Value = livestock[Value]
+			
+			// Retrieve the corresponding coefficient from the merged Countries table
+			VAR LSU_Coeff = 
+			    SWITCH(
+			        CurrentAnimal,
+			        "Cattle",   RELATED(Countries[Cattle_LSU]),
+			        "Chickens", RELATED(Countries[Chickens_LSU]),
+			        "Goats",    RELATED(Countries[Goats_LSU]),
+			        "Sheep",    RELATED(Countries[Sheep_LSU]),
+			        BLANK()
+			    )
+			
+			RETURN
+			    DIVIDE(LSU_Value, LSU_Coeff, 0)
+			```
+		formatString: 0
+		lineageTag: 1f8c1df3-8f58-4b35-a3b5-5eb1fdcdeb33
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
 	partition livestock = m
 		mode: import
 		source =

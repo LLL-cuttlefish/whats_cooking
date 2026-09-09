@@ -21,7 +21,7 @@ table manure
 		dataType: int64
 		formatString: 0
 		lineageTag: 15052e13-7095-49bb-b955-81ebfa91230d
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Area Code (M49)
 
 		annotation SummarizationSetBy = Automatic
@@ -142,6 +142,88 @@ table manure
 
 		annotation SummarizationSetBy = Automatic
 
+	column Daily_Manure_kg =
+			
+			SWITCH(
+			    TRUE(),
+			    manure[Item] = "Cattle, dairy",     28.0,  // Lower-bound for lactating cows (28–35 kg/day)
+			    manure[Item] = "Cattle, non-dairy", 12.0,  // Lower-bound for beef/young stock (12–18 kg/day)
+			    manure[Item] = "Chickens, broilers", 0.07,  // Small meat birds (~0.07 kg/day)
+			    manure[Item] = "Chickens, layers",   0.10,  // Standard laying hens (~0.10 kg/day)
+			    manure[Item] = "Goats",              1.20,  // Small ruminants / dry climates (~1.2 kg/day)
+			    manure[Item] = "Sheep",              1.20,  // Small ruminants / dry climates (~1.2 kg/day)
+			    BLANK()
+			)
+		lineageTag: 2dcffa44-fb77-4511-a77e-7471a6686635
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VS_Percentage =
+			
+			SWITCH(
+			    TRUE(),
+			    manure[item] = "Cattle, dairy",     0.82,  // ~82% of Total Solids (TS)
+			    manure[item] = "Cattle, non-dairy", 0.80,  // ~80% of Total Solids (TS)
+			    manure[item] = "Chickens, broilers", 0.75,  // ~75% of Total Solids (TS)
+			    manure[item] = "Chickens, layers",   0.70,  // ~70% of Total Solids (TS)
+			    manure[item] = "Goats",              0.80,  // ~80% of Total Solids (TS)
+			    manure[item] = "Sheep",              0.80,  // ~80% of Total Solids (TS)
+			    BLANK()
+			)
+		lineageTag: 996a2c13-4474-4cfc-a2f7-9b4a64ecc68e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TS_Percentage =
+			
+			SWITCH(
+			    TRUE(),
+			    manure[item] = "Cattle, dairy",     0.12,  // 12% Total Solids (88% moisture)
+			    manure[item] = "Cattle, non-dairy", 0.14,  // 14% Total Solids (86% moisture)
+			    manure[item] = "Chickens, broilers", 0.25,  // 25% Total Solids (dryer poultry litter)
+			    manure[item] = "Chickens, layers",   0.22,  // 22% Total Solids
+			    manure[item] = "Goats",              0.30,  // 30% Total Solids (drier, dense pellets)
+			    manure[item] = "Sheep",              0.30,  // 30% Total Solids
+			    BLANK()
+			)
+		lineageTag: a32a6a4e-76e6-4c31-b3a8-6dcf7b3075ac
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Biogas_Yield_m3_kg = ```
+			
+			VAR TS = manure[TS_Percentage]
+			VAR VS = manure[VS_Percentage]
+			VAR BiogasPerKgVS = 
+			    SWITCH(
+			        TRUE(),
+			        manure[item] = "Cattle, dairy",     0.367,
+			        manure[item] = "Cattle, non-dairy", 0.367,
+			        manure[item] = "Chickens, broilers", 0.500,
+			        manure[item] = "Chickens, layers",   0.500,
+			        manure[item] = "Goats",              0.417,
+			        manure[item] = "Sheep",              0.417,
+			        BLANK()
+			    )
+			RETURN
+			    TS * VS * BiogasPerKgVS
+			```
+		lineageTag: 58e82ffe-d5f6-48be-80fd-1a92e213ff0b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition manure = m
 		mode: import
 		source =
@@ -151,4 +233,8 @@ table manure
 				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"Domain Code", type text}, {"Domain", type text}, {"Area Code (M49)", Int64.Type}, {"Area", type text}, {"Element Code", Int64.Type}, {"Element", type text}, {"Item Code (CPC)", type text}, {"Item", type text}, {"Year Code", Int64.Type}, {"Year", Int64.Type}, {"Unit", type text}, {"Value", type number}, {"Flag", type text}, {"Flag Description", type text}, {"Note", type text}})
 				in
 				  #"Changed column type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
 

@@ -77,9 +77,10 @@ table LSU_region
 				  #"Transposed table1" = Table.Transpose(#"Removed top rows"),
 				    #"Promoted Headers" = Table.PromoteHeaders(#"Transposed table1", [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Region", type text}, {"Cattle", type number}, {"Sheep", type number}, {"Goats", type number}, {"Chickens", type number}}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Cattle", "Cattle_LSU"}, {"Chickens", "Chickens_LSU"}, {"Goats", "Goats_LSU"}, {"Sheep", "Sheep_LSU"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Cattle", "Cattle_LSU"}, {"Chickens", "Chickens_LSU"}, {"Goats", "Goats_LSU"}, {"Sheep", "Sheep_LSU"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns",null,0.01,Replacer.ReplaceValue,{"Chickens_LSU"})
 				in
-				  #"Renamed Columns"
+				  #"Replaced Value"
 
 	changedProperty = IsHidden
 

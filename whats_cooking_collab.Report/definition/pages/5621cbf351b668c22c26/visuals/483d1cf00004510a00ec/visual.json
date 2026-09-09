@@ -41,14 +41,14 @@
             "zoom": {
               "expr": {
                 "Literal": {
-                  "Value": "0.18D"
+                  "Value": "0.22D"
                 }
               }
             },
             "centerLongitude": {
               "expr": {
                 "Literal": {
-                  "Value": "-17.583625793457145D"
+                  "Value": "-17.58362579345703D"
                 }
               }
             },
@@ -56,6 +56,21 @@
               "expr": {
                 "Literal": {
                   "Value": "2.842170943040401e-14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
