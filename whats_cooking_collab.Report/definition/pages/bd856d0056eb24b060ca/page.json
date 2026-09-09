@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
-  "name": "99c55e54a3243b726762",
-  "displayName": "Livestock Growth",
+  "name": "bd856d0056eb24b060ca",
+  "displayName": "Nitrogen Levels Growth",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280

@@ -37,6 +37,27 @@
           "type": "BaseTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "noun_Chicken_8134641_@700338387431455501.png",
+          "path": "noun_Chicken_8134641_@700338387431455501.png",
+          "type": "Image"
+        },
+        {
+          "name": "noun_Cow_7521665_@70039515040822616443.png",
+          "path": "noun_Cow_7521665_@70039515040822616443.png",
+          "type": "Image"
+        },
+        {
+          "name": "noun_Goat_8150859_@7007478362666310385.png",
+          "path": "noun_Goat_8150859_@7007478362666310385.png",
+          "type": "Image"
+        }
+      ]
     }
   ],
   "settings": {

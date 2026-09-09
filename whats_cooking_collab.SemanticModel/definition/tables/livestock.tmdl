@@ -1,0 +1,131 @@
+table livestock
+	lineageTag: 78a43bee-d837-49e6-8fa4-49c47b88d915
+
+	column 'Area Code'
+		dataType: string
+		lineageTag: 950556dc-c13b-4ddc-a7de-37115f8a5c34
+		summarizeBy: none
+		sourceColumn: Area Code
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Area Code (M49)'
+		dataType: string
+		lineageTag: 20006403-d4e2-4022-87fc-afc2031edcd9
+		summarizeBy: none
+		sourceColumn: Area Code (M49)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Area
+		dataType: string
+		lineageTag: 96843236-d84d-4a6f-9f73-a5237816b1bb
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Item Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1cc40b05-f87d-4ed5-8235-b5f31dbfaa8c
+		summarizeBy: count
+		sourceColumn: Item Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Item Code (CPC)'
+		dataType: string
+		lineageTag: 93caa3de-d5b3-40b1-8ed2-8089052b1898
+		summarizeBy: none
+		sourceColumn: Item Code (CPC)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Item
+		dataType: string
+		lineageTag: 8f5383b9-ecd9-46b4-a4d5-c741465b4741
+		summarizeBy: none
+		sourceColumn: Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Element Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: e911552b-9c7c-4f46-b9d5-6f13d67c36cd
+		summarizeBy: count
+		sourceColumn: Element Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Element
+		dataType: string
+		lineageTag: b8f0ce64-2d1c-4c32-b496-7ba510caf562
+		summarizeBy: none
+		sourceColumn: Element
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 12a9cc2c-d529-4af9-b2ad-72a80bf921e0
+		summarizeBy: count
+		sourceColumn: Year Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 483174c4-34fc-4cb3-8e4e-7b0ab613602e
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		lineageTag: 0a1e62dd-b4d1-497a-bfaf-e7c0cc465904
+		summarizeBy: none
+		sourceColumn: Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: fe4dea7e-2be4-4ede-8572-ae63a6f71b64
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Flag
+		dataType: string
+		lineageTag: 1d13ae82-5b0d-4731-a502-4cf1a3c1c1f8
+		summarizeBy: none
+		sourceColumn: Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition livestock = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("C:\Users\emily\Documents\whats_cooking\Bioenergy\livestock.csv"), [Delimiter = ",", Columns = 13, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"Area Code", Int64.Type}, {"Area Code (M49)", type text}, {"Area", type text}, {"Item Code", Int64.Type}, {"Item Code (CPC)", type text}, {"Item", type text}, {"Element Code", Int64.Type}, {"Element", type text}, {"Year Code", Int64.Type}, {"Year", Int64.Type}, {"Unit", type text}, {"Value", type number}, {"Flag", type text}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed column type", each ([Item] = "Cattle" or [Item] = "Chickens" or [Item] = "Goats") and ([Year] = 2013 or [Year] = 2014 or [Year] = 2015 or [Year] = 2016 or [Year] = 2017 or [Year] = 2018 or [Year] = 2019 or [Year] = 2020 or [Year] = 2021 or [Year] = 2022 or [Year] = 2023) and ([Element] = "Stocks"))
+				in
+				  #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

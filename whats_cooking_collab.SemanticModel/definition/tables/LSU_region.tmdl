@@ -1,0 +1,89 @@
+table LSU_region
+	isHidden
+	lineageTag: 3d8b8070-f6d5-445d-9fbc-6885182520ca
+
+	column Region
+		dataType: string
+		isHidden
+		lineageTag: 0935d444-d355-44db-8ac1-f112995ba8c2
+		summarizeBy: none
+		sourceColumn: Region
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cattle_LSU
+		dataType: double
+		isHidden
+		lineageTag: 5e4ec7f3-0875-42cd-8697-aa07c17f0628
+		summarizeBy: sum
+		sourceColumn: Cattle_LSU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sheep_LSU
+		dataType: double
+		isHidden
+		lineageTag: 9245dd11-055f-440e-a884-24b073926761
+		summarizeBy: sum
+		sourceColumn: Sheep_LSU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Goats_LSU
+		dataType: double
+		isHidden
+		lineageTag: 9b608c67-448b-4f53-a94b-0c8c59147bba
+		summarizeBy: sum
+		sourceColumn: Goats_LSU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Chickens_LSU
+		dataType: double
+		isHidden
+		lineageTag: c9bf7afd-c257-4bcf-9002-9ab0585a2770
+		summarizeBy: sum
+		sourceColumn: Chickens_LSU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition LSU_region = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Users\emily\Documents\whats_cooking\Bioenergy\Livestock_unit_coefficients.xlsx"), null, false),
+				  Sheet1_sheet = Source{[Item = "Sheet1", Kind = "Sheet"]}[Data],
+				  #"Filter null and whitespace" = each List.Select(_, each _ <> null and (not (_ is text) or Text.Trim(_) <> "")),
+				  #"Transposed table" = Table.Transpose(Sheet1_sheet),
+				  #"Removed top rows" = Table.Skip(#"Transposed table", each try List.IsEmpty(List.Skip(#"Filter null and whitespace"(Record.FieldValues(_)), 1)) otherwise false),
+				  #"Transposed table1" = Table.Transpose(#"Removed top rows"),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Transposed table1", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Region", type text}, {"Cattle", type number}, {"Sheep", type number}, {"Goats", type number}, {"Chickens", type number}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Cattle", "Cattle_LSU"}, {"Chickens", "Chickens_LSU"}, {"Goats", "Goats_LSU"}, {"Sheep", "Sheep_LSU"}})
+				in
+				  #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

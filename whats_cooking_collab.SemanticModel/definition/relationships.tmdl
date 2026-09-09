@@ -1,0 +1,4 @@
+relationship AutoDetected_2e7638c0-f9af-44f6-802a-b647424f8ef2
+	fromColumn: livestock.Area
+	toColumn: countries.Area
+
