@@ -18,17 +18,19 @@ table bioenergy
 		annotation SummarizationSetBy = Automatic
 
 	column 'Area Code (M49)'
-		dataType: int64
-		formatString: 0
+		dataType: string
 		lineageTag: 1c0187ae-0f00-4d2a-b238-030143d62ed0
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Area Code (M49)
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 
 	column Area
 		dataType: string
 		lineageTag: d6379fbf-e8df-4842-bc88-19cf1db09ea5
+		dataCategory: Country
 		summarizeBy: none
 		sourceColumn: Area
 

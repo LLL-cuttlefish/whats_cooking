@@ -1,0 +1,94 @@
+table countries
+	lineageTag: 2472b0ad-2e16-4c29-87f6-2a239352ea62
+
+	column Area
+		dataType: string
+		lineageTag: a482e86e-4332-4a90-a346-9b6b527bebdd
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Area Code (M49)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c7ac573-85f9-49e5-921f-031349639a75
+		summarizeBy: none
+		sourceColumn: Area Code (M49)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LSU Region Equivalent'
+		dataType: string
+		lineageTag: 70542aec-cd89-4e8b-b7c6-532aa6395d41
+		summarizeBy: none
+		sourceColumn: LSU Region Equivalent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cattle_LSU
+		dataType: double
+		lineageTag: bdcba341-337b-4bf7-bdad-34554345eef1
+		summarizeBy: sum
+		sourceColumn: Cattle_LSU
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sheep_LSU
+		dataType: double
+		lineageTag: 90d4c30d-32ac-4d26-be84-266fab10d227
+		summarizeBy: sum
+		sourceColumn: Sheep_LSU
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Goats_LSU
+		dataType: double
+		lineageTag: fd9ed4bd-733c-4bbd-8957-96d57142e366
+		summarizeBy: sum
+		sourceColumn: Goats_LSU
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Chickens_LSU
+		dataType: double
+		lineageTag: f845f5bc-72d6-42ce-8473-174417e027be
+		summarizeBy: sum
+		sourceColumn: Chickens_LSU
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition countries = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("C:\Users\emily\Documents\whats_cooking\Bioenergy\livestock.csv"), [Delimiter = ",", Columns = 14, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Removed Other Columns" = Table.SelectColumns(#"Promoted headers",{"Area", "Area Code (M49)"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"Area"}),
+				    #"Split Column by Position" = Table.SplitColumn(#"Removed Duplicates", "Area Code (M49)", Splitter.SplitTextByPositions({0, 3}, true), {"Area Code (M49).1", "Area Code (M49).2"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Split Column by Position",{{"Area", type text}, {"Area Code (M49).1", type text}, {"Area Code (M49).2", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Area Code (M49).1"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Area Code (M49).2", "Area Code (M49)"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Area Code (M49)"}, lsu_country, {"m49_code"}, "lsu_country", JoinKind.LeftOuter),
+				    #"Expanded lsu_country" = Table.ExpandTableColumn(#"Merged Queries", "lsu_country", {"LSU_region_equivalent"}, {"lsu_country.LSU_region_equivalent"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded lsu_country", {"lsu_country.LSU_region_equivalent"}, LSU_region, {"Region"}, "LSU_region", JoinKind.LeftOuter),
+				    #"Expanded LSU_region" = Table.ExpandTableColumn(#"Merged Queries1", "LSU_region", {"Cattle_LSU", "Sheep_LSU", "Goats_LSU", "Chickens_LSU"}, {"Cattle_LSU", "Sheep_LSU", "Goats_LSU", "Chickens_LSU"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Expanded LSU_region",{{"lsu_country.LSU_region_equivalent", "LSU Region Equivalent"}}),
+				    #"Sorted Rows" = Table.Sort(#"Renamed Columns1",{{"Area", Order.Ascending}})
+				in
+				    #"Sorted Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

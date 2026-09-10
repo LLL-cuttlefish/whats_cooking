@@ -10,9 +10,15 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["bioenergy"]
+annotation PBI_QueryOrder = ["bioenergy","countries","livestock","manure","Measures (2)","LSU_region","lsu_country"]
 
 ref table bioenergy
+ref table countries
+ref table livestock
+ref table manure
+ref table 'Measures (2)'
+ref table LSU_region
+ref table lsu_country
 
 ref cultureInfo en-US
 

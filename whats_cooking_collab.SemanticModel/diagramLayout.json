@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 293,
+        "y": 38
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "bioenergy",
+          "nodeLineageTag": "48c56081-bdd0-4c8d-8ef9-94b5e013e5f5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 280,
+            "y": 475
+          },
+          "nodeIndex": "countries",
+          "nodeLineageTag": "2472b0ad-2e16-4c29-87f6-2a239352ea62",
+          "size": {
+            "height": 268,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 862,
+            "y": 0
+          },
+          "nodeIndex": "livestock",
+          "nodeLineageTag": "78a43bee-d837-49e6-8fa4-49c47b88d915",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 403,
+            "y": 0
+          },
+          "nodeIndex": "manure",
+          "nodeLineageTag": "27b0647d-c1d2-4df1-9e4b-f79ebe9062a1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1150,
+            "y": 249.5
+          },
+          "nodeIndex": "Measures (2)",
+          "nodeLineageTag": "9e1c1992-2c09-4428-9d34-d146a2c6e212",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1242,
+            "y": 533.5
+          },
+          "nodeIndex": "LSU_region",
+          "nodeLineageTag": "3d8b8070-f6d5-445d-9fbc-6885182520ca",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 896,
+            "y": 540.833324432373
+          },
+          "nodeIndex": "lsu_country",
+          "nodeLineageTag": "b8863de3-3113-4e8f-8435-8dacd4947ccc",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,81 @@
+table lsu_country
+	isHidden
+	lineageTag: b8863de3-3113-4e8f-8435-8dacd4947ccc
+
+	column Area
+		dataType: string
+		isHidden
+		lineageTag: 7119b933-90d6-4492-83c5-2b65c2a62604
+		summarizeBy: none
+		sourceColumn: Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column m49_code
+		dataType: string
+		isHidden
+		lineageTag: dd75ddf2-5c27-40ce-8a62-06d367b97bde
+		summarizeBy: none
+		sourceColumn: m49_code
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column region_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5b906321-418c-4ea2-ab0c-9c6a69a3da20
+		summarizeBy: sum
+		sourceColumn: region_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column region_name
+		dataType: string
+		isHidden
+		lineageTag: dd50f2f6-5c2f-4f27-99f0-0357e354eb98
+		summarizeBy: none
+		sourceColumn: region_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LSU_region_equivalent
+		dataType: string
+		isHidden
+		lineageTag: 6488f6f8-ff06-4ad4-ad6f-4c3a5401c9e1
+		summarizeBy: none
+		sourceColumn: LSU_region_equivalent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lsu_country = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("C:\Users\emily\Documents\whats_cooking\Bioenergy\lsu_country.csv"), [Delimiter = ",", Columns = 5, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"country_or_area", type text}, {"m49_code", Int64.Type}, {"region_code", Int64.Type}, {"region_name", type text}, {"LSU_region_equivalent", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed column type",{{"country_or_area", "Area"}}),
+				    #"Sorted Rows" = Table.Sort(#"Renamed Columns",{{"Area", Order.Ascending}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Sorted Rows","China, mainland","China",Replacer.ReplaceText,{"Area"})
+				in
+				  #"Replaced Value"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
