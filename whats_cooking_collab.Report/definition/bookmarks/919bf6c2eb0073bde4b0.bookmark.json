@@ -1,0 +1,285 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "All Animals",
+  "name": "919bf6c2eb0073bde4b0",
+  "options": {
+    "targetVisualNames": [
+      "29a5e49bad6ab5d1a742"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "5621cbf351b668c22c26",
+    "sections": {
+      "5621cbf351b668c22c26": {
+        "visualContainers": {
+          "1573193283cd7a5c2648": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "16c7a683dd64716d14aa": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "89457bea3c18904b8d00",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Measures (2)"
+                        }
+                      },
+                      "Property": "People Supported (30% Model)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Measures (2)"
+                        }
+                      },
+                      "Property": "People Supported (30% Model)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "35a5398a3425a5946e94": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "5c0909e1494b7d620d18": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "21fc6134a5ddabd9d900",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "countries"
+                        }
+                      },
+                      "Property": "Area"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "85e828f5141c560d01a1",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "countries"
+                            }
+                          },
+                          "Property": "Area Code (M49)"
+                        }
+                      },
+                      "Function": 3
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "azureMap",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "countries"
+                        }
+                      },
+                      "Property": "Area"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "72015670000000690e83": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "4f0fe90086490609aedc",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Measures (2)"
+                        }
+                      },
+                      "Property": "People Supported (20% Model)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Measures (2)"
+                        }
+                      },
+                      "Property": "People Supported (20% Model)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "7b4e8f9b449c529a763c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "198e80c030024254c307",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Measures (2)"
+                        }
+                      },
+                      "Property": "People Supported (10% Model)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Measures (2)"
+                        }
+                      },
+                      "Property": "People Supported (10% Model)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "803095ea99ad230d0e54": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "b345eeaa492ebc7ed661": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "bcadd66467687637c248": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "29a5e49bad6ab5d1a742": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e32454257a28adae9a10",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "livestock"
+                        }
+                      },
+                      "Property": "Item"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Basic'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "livestock"
+                        }
+                      },
+                      "Property": "Item"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {}
+  }
+}

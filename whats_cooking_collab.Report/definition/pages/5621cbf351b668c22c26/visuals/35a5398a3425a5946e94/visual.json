@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "35a5398a3425a5946e94",
   "position": {
-    "x": 31.285750657727235,
-    "y": 505.20693654700273,
-    "z": 3000,
-    "height": 126.30173413675068,
-    "width": 142.52397521853518,
-    "tabOrder": 3000
+    "x": 48.04922134041967,
+    "y": 453.03551549538548,
+    "z": 5000,
+    "height": 155.9148202678924,
+    "width": 151.01183849846183,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "image",
@@ -39,6 +39,42 @@
                       "Value": "'Normal'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bookmark'"
+                }
+              }
+            },
+            "bookmark": {
+              "expr": {
+                "Literal": {
+                  "Value": "'709c17831842aebd94c8'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Goat manure'"
                 }
               }
             }

@@ -3,6 +3,7 @@ model Model
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: en-US
 	dataAccessOptions
+		fastCombine
 		legacyRedirects
 		returnErrorValuesAsNull
 
@@ -10,15 +11,17 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["bioenergy","countries","livestock","manure","Measures (2)","LSU_region","lsu_country"]
+annotation PBI_QueryOrder = ["countries","livestock","manure","Measures (2)","LSU_region","lsu_country","energy_per_capita","energy_per_capita_codes","ISO_Lookup"]
 
-ref table bioenergy
 ref table countries
 ref table livestock
 ref table manure
 ref table 'Measures (2)'
 ref table LSU_region
 ref table lsu_country
+ref table energy_per_capita
+ref table energy_per_capita_codes
+ref table ISO_Lookup
 
 ref cultureInfo en-US
 

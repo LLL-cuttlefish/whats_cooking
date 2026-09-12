@@ -2,7 +2,11 @@ relationship AutoDetected_2e7638c0-f9af-44f6-802a-b647424f8ef2
 	fromColumn: livestock.Area
 	toColumn: countries.Area
 
-relationship de039d19-e08a-e9b3-6769-7afc8a32cff3
-	fromColumn: manure.'Area Code (M49)'
+relationship 389b3439-e556-f80c-8041-7fb16d3952ab
+	fromColumn: energy_per_capita_codes.'Area Code (M49)'
 	toColumn: countries.'Area Code (M49)'
+
+relationship AutoDetected_14828208-e43b-46cd-9093-7e9b7a5d2690
+	fromColumn: manure.'Area Code (M49)'
+	toColumn: ISO_Lookup.'Area Code (M49)'
 

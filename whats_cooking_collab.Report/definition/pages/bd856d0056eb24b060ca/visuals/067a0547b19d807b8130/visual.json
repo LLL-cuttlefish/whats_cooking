@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "067a0547b19d807b8130",
+  "position": {
+    "x": 40.555602704461229,
+    "y": 673.22300489405643,
+    "z": 7000,
+    "height": 39.396871198619479,
+    "width": 599.06418852018442,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Data source:  FAOSTAT Emissions from Livestock ("
+                  },
+                  {
+                    "value": "https://www.fao.org/faostat/en/#data/GLE",
+                    "textStyle": {
+                      "fontFamily": "DM Sans, sans-serif",
+                      "fontSize": "10pt",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    },
+                    "url": "https://www.fao.org/faostat/en/#data/GLE"
+                  },
+                  {
+                    "value": ")",
+                    "textStyle": {
+                      "fontFamily": "DM Sans, sans-serif",
+                      "fontSize": "10pt",
+                      "textDecoration": "underline",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontFamily": "DM Sans, sans-serif",
+                      "fontSize": "10pt",
+                      "color": "#121212"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

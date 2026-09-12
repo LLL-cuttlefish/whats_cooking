@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "1573193283cd7a5c2648",
   "position": {
-    "x": 23.174630116834987,
-    "y": 326.76228464737335,
-    "z": 2000,
-    "height": 125.14300263090894,
-    "width": 150.63509575942743,
-    "tabOrder": 2000
+    "x": 48.04922134041967,
+    "y": 290.25652075029029,
+    "z": 4000,
+    "height": 162.77899474509522,
+    "width": 151.01183849846183,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "image",
@@ -39,6 +39,42 @@
                       "Value": "'Normal'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bookmark'"
+                }
+              }
+            },
+            "bookmark": {
+              "expr": {
+                "Literal": {
+                  "Value": "'e7d1e4fba1b14eae7459'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cattle manure'"
                 }
               }
             }

@@ -1,19 +1,39 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "7b4e8f9b449c529a763c",
+  "name": "676321ddec01343b8258",
   "position": {
     "x": 768.26147513076853,
-    "y": 429.7700331177071,
-    "z": 16500,
-    "height": 153.39874338419634,
-    "width": 144.52443591568911,
-    "tabOrder": 3000
+    "y": 72.262217957844555,
+    "z": 16000,
+    "height": 273.8357733139373,
+    "width": 469.07053762109626,
+    "tabOrder": 15000
   },
   "visual": {
-    "visualType": "cardVisual",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
-        "Data": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "countries"
+                    }
+                  },
+                  "Property": "Area"
+                }
+              },
+              "queryRef": "countries.Area",
+              "nativeQueryRef": "Country",
+              "active": true,
+              "displayName": "Country"
+            }
+          ]
+        },
+        "Y": {
           "projections": [
             {
               "field": {
@@ -23,12 +43,12 @@
                       "Entity": "Measures (2)"
                     }
                   },
-                  "Property": "People Supported (10% Model)"
+                  "Property": "Per Capita Demand (kWh)"
                 }
               },
-              "queryRef": "Measures (2).People Supported (10% Model)",
-              "nativeQueryRef": "People Supported (10%)",
-              "displayName": "People Supported (10%)"
+              "queryRef": "Measures (2).Per Capita Demand (kWh)",
+              "nativeQueryRef": "Per Person Demand (kWh)",
+              "displayName": "Per Person Demand (kWh)"
             }
           ]
         }
@@ -43,7 +63,7 @@
                     "Entity": "Measures (2)"
                   }
                 },
-                "Property": "People Supported (10% Model)"
+                "Property": "Per Capita Demand (kWh)"
               }
             },
             "direction": "Descending"
@@ -53,77 +73,41 @@
       }
     },
     "objects": {
-      "value": [
+      "valueAxis": [
         {
           "properties": {
-            "fontSize": {
+            "showAxisTitle": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "false"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ],
-      "label": [
+      "categoryAxis": [
         {
           "properties": {
-            "textWrap": {
+            "showAxisTitle": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]
     },
     "visualContainerObjects": {
-      "background": [
+      "title": [
         {
           "properties": {
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F7DF06'"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "border": [
-        {
-          "properties": {
-            "show": {
+            "text": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "padding": [
-        {
-          "properties": {
-            "top": {
-              "expr": {
-                "Literal": {
-                  "Value": "5D"
+                  "Value": "'Per Person Demand (kWh) by Country (''24-''25)'"
                 }
               }
             }
@@ -136,7 +120,21 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "25b9369dc070019c0a8b",
+        "name": "2d22f928026bc6750a02",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "countries"
+              }
+            },
+            "Property": "Area"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "49c4574f3042abc0b5ad",
         "field": {
           "Measure": {
             "Expression": {
@@ -144,7 +142,7 @@
                 "Entity": "Measures (2)"
               }
             },
-            "Property": "People Supported (10% Model)"
+            "Property": "Per Capita Demand (kWh)"
           }
         },
         "type": "Advanced"

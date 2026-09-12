@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "8af196234a8b0d85c9c1",
+  "name": "5c0909e1494b7d620d18",
   "position": {
-    "x": 220.15898610993239,
-    "y": 85.746131432289459,
-    "z": 2000,
-    "height": 608.33404056691847,
-    "width": 460.0164078191745,
-    "tabOrder": 2000
+    "x": 254.95505201039009,
+    "y": 129.43871871296727,
+    "z": 11000,
+    "height": 469.70565351144944,
+    "width": 457.93849726481608,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "azureMap",
@@ -20,19 +20,20 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "manure"
+                      "Entity": "countries"
                     }
                   },
-                  "Property": "Area"
+                  "Property": "ISO_Code"
                 }
               },
-              "queryRef": "manure.Area",
-              "nativeQueryRef": "Area1",
-              "active": true
+              "queryRef": "countries.ISO_Code",
+              "nativeQueryRef": "ISO Code",
+              "active": true,
+              "displayName": "ISO Code"
             }
           ]
         },
-        "Size": {
+        "Tooltips": {
           "projections": [
             {
               "field": {
@@ -41,17 +42,18 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "manure"
+                          "Entity": "countries"
                         }
                       },
-                      "Property": "Value"
+                      "Property": "Area"
                     }
                   },
-                  "Function": 0
+                  "Function": 3
                 }
               },
-              "queryRef": "Sum(manure.Value)",
-              "nativeQueryRef": "Sum of Value"
+              "queryRef": "Min(countries.Area)",
+              "nativeQueryRef": "Country",
+              "displayName": "Country"
             }
           ]
         }
@@ -61,20 +63,6 @@
       "mapControls": [
         {
           "properties": {
-            "centerLongitude": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "centerLatitude": {
-              "expr": {
-                "Literal": {
-                  "Value": "2.842170943040401e-14D"
-                }
-              }
-            },
             "defaultStyle": {
               "expr": {
                 "Literal": {
@@ -103,23 +91,24 @@
                 }
               }
             },
+            "centerLongitude": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
             "zoom": {
               "expr": {
                 "Literal": {
-                  "Value": "0.18D"
+                  "Value": "-0.15D"
                 }
               }
-            }
-          }
-        }
-      ],
-      "categoryLabels": [
-        {
-          "properties": {
-            "show": {
+            },
+            "centerLatitude": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "2.842170943040401e-14D"
                 }
               }
             }
@@ -181,6 +170,19 @@
           }
         }
       ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "filledMap": [
         {
           "properties": {
@@ -202,6 +204,71 @@
         }
       ]
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6e6a2ce8e028402b7cc8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "countries"
+              }
+            },
+            "Property": "ISO_Code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5a4a6aedc244d075a63b",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "countries"
+                  }
+                },
+                "Property": "Area"
+              }
+            },
+            "Function": 3
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

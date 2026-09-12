@@ -1,0 +1,110 @@
+table ISO_Lookup
+	lineageTag: 6be93a4b-306e-48a6-86f5-ee6aa20e11f7
+
+	column name
+		dataType: string
+		lineageTag: 01dbbdbe-9964-4895-911a-08242490f648
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column alpha-2
+		dataType: string
+		lineageTag: d94bd4ba-f79d-43f7-827f-aeaf1df1d786
+		summarizeBy: none
+		sourceColumn: alpha-2
+
+		annotation SummarizationSetBy = Automatic
+
+	column alpha-3
+		dataType: string
+		lineageTag: 2145a097-5087-4866-b01d-4d1367cec965
+		summarizeBy: none
+		sourceColumn: alpha-3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Area Code (M49)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 821e0020-aeff-4809-9a0e-50589030907d
+		summarizeBy: none
+		sourceColumn: Area Code (M49)
+
+		annotation SummarizationSetBy = Automatic
+
+	column iso_3166-2
+		dataType: string
+		lineageTag: 00426aea-8c99-41eb-8bff-82c0104d78ad
+		summarizeBy: none
+		sourceColumn: iso_3166-2
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 3fc2bd59-eb93-4e5a-8065-e9d9a280c13c
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub-region
+		dataType: string
+		lineageTag: a8242361-4b46-4898-97f7-75a965a43f9a
+		summarizeBy: none
+		sourceColumn: sub-region
+
+		annotation SummarizationSetBy = Automatic
+
+	column intermediate-region
+		dataType: string
+		lineageTag: 0d8de5f2-e501-4f3a-b971-08ee2d97a752
+		summarizeBy: none
+		sourceColumn: intermediate-region
+
+		annotation SummarizationSetBy = Automatic
+
+	column region-code
+		dataType: int64
+		formatString: 0
+		lineageTag: fc3a421a-51bf-4df7-b676-e441292c4b2c
+		summarizeBy: none
+		sourceColumn: region-code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub-region-code
+		dataType: int64
+		formatString: 0
+		lineageTag: 862bcda1-6cb8-4f8a-8b97-f2ea2f09b4b6
+		summarizeBy: none
+		sourceColumn: sub-region-code
+
+		annotation SummarizationSetBy = Automatic
+
+	column intermediate-region-code
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b63f132-1845-4fbd-8b64-c791594a9644
+		summarizeBy: none
+		sourceColumn: intermediate-region-code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ISO_Lookup = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv"), [Delimiter = ",", Columns = 11, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"name", type text}, {"alpha-2", type text}, {"alpha-3", type text}, {"country-code", Int64.Type}, {"iso_3166-2", type text}, {"region", type text}, {"sub-region", type text}, {"intermediate-region", type text}, {"region-code", Int64.Type}, {"sub-region-code", Int64.Type}, {"intermediate-region-code", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed column type",{{"country-code", "Area Code (M49)"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

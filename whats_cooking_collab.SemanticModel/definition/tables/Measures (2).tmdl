@@ -3,23 +3,28 @@ table 'Measures (2)'
 
 	measure 'Total Biogas Yield (m3)' = ```
 			
-			SUMX(
-			    livestock,
-			    VAR CurrentItem = livestock[Item]
-			    VAR DailyManure = 
-			        LOOKUPVALUE(
-			            manure[Daily_Manure_kg],
-			            manure[animal_type], 
-			            CurrentItem
-			        )
-			    VAR YieldPerKg = 
-			        LOOKUPVALUE(
-			            manure[Biogas_Yield_m3_kg],
-			            manure[animal_type], 
-			            CurrentItem
-			        )
-			    RETURN
-			        livestock[Head_Count] * DailyManure * 365 * YieldPerKg
+			VAR MaxYear = CALCULATE(MAX(livestock[Year]), REMOVEFILTERS(livestock[Year]))
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        livestock,
+			        VAR CurrentAnimal = livestock[Item]
+			        
+			        VAR DailyManure = 
+			            CALCULATE(
+			                AVERAGEX(manure, manure[Daily_Manure_kg]),
+			                manure[animal_type] = CurrentAnimal
+			            )
+			        VAR YieldPerKg = 
+			            CALCULATE(
+			                AVERAGEX(manure, manure[Biogas_Yield_m3_kg]),
+			                manure[animal_type] = CurrentAnimal
+			            )
+			            
+			        RETURN
+			            livestock[Head_Count] * DailyManure * 365 * YieldPerKg
+			    ),
+			    livestock[Year] = MaxYear
 			)
 			```
 		lineageTag: a87d9122-71fa-487b-836e-ac61eae36243
@@ -45,6 +50,49 @@ table 'Measures (2)'
 
 	measure 'Energy Output (30% Model)' = [Gross Energy Potential (kWh)] * 0.30
 		lineageTag: ad254050-5b29-4b92-a30c-e98618363fef
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Per Capita Demand (kWh)' =
+			
+			VAR MaxEnergyYear = CALCULATE(MAX(energy_per_capita_codes[Year]), REMOVEFILTERS(energy_per_capita_codes[Year]))
+			RETURN
+			CALCULATE(
+			    AVERAGE(energy_per_capita_codes[Total energy supply]),
+			    energy_per_capita_codes[Year] = MaxEnergyYear
+			)
+		lineageTag: 0ae3164e-4989-4ef8-80b2-b4b616706d61
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total People Supported (100% Potential)' =
+			
+			VAR AnnualBiogas_kWh = [Gross Energy Potential (kWh)]
+			VAR IndividualDemand_kWh = [Per Capita Demand (kWh)]
+			RETURN
+			    DIVIDE(AnnualBiogas_kWh, IndividualDemand_kWh, 0)
+		lineageTag: d2601880-34ba-4b7e-bb68-418ba7378e24
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'People Supported (10% Model)' =
+			
+			[Total People Supported (100% Potential)] * 0.10
+		lineageTag: 3377b168-5d2b-456b-bec9-a691ff48b222
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'People Supported (20% Model)' =
+			
+			[Total People Supported (100% Potential)] * 0.20
+		lineageTag: 0f3b305c-4754-4081-8464-3446505089da
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'People Supported (30% Model)' =
+			
+			[Total People Supported (100% Potential)] * 0.30
+		lineageTag: 05374ade-66c7-4f6e-addf-901448389fe2
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 

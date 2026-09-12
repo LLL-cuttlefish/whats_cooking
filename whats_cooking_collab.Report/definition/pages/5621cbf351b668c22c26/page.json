@@ -4,5 +4,12 @@
   "displayName": "Energy Solution",
   "displayOption": "FitToPage",
   "height": 720,
-  "width": 1280
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "5c0909e1494b7d620d18",
+      "target": "676321ddec01343b8258",
+      "type": "DataFilter"
+    }
+  ]
 }

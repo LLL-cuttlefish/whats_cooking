@@ -1,0 +1,79 @@
+table energy_per_capita
+	isHidden
+	lineageTag: 60acb2a0-3b78-4be5-b80c-006cc0c724a9
+
+	column Area
+		dataType: string
+		isHidden
+		lineageTag: f0c01fcb-fb18-43cb-b921-89147705c37a
+		summarizeBy: none
+		sourceColumn: Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		isHidden
+		lineageTag: 13d7f4cb-79d2-4d72-aacc-b414452e55b7
+		summarizeBy: none
+		sourceColumn: Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d66a2ff6-46b8-4ba2-a54e-471e0f84313d
+		summarizeBy: sum
+		sourceColumn: Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total energy supply'
+		dataType: double
+		isHidden
+		lineageTag: 8f7a14d5-3e79-4a6a-a7b7-0fc9a6509b13
+		summarizeBy: sum
+		sourceColumn: Total energy supply
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total energy supply (Original Year)'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ac5985a3-7260-4734-85e4-c8a2ea7697cb
+		summarizeBy: sum
+		sourceColumn: Total energy supply (Original Year)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition energy_per_capita = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("C:\Users\emily\Documents\whats_cooking\Bioenergy\energy_per_capita.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"Area", type text}, {"Code", type text}, {"Year", Int64.Type}, {"Total energy supply", type number}, {"Total energy supply (Original Year)", Int64.Type}})
+				in
+				  #"Changed column type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

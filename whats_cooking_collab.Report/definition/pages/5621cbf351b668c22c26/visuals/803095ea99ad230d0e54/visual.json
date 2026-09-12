@@ -1,0 +1,112 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "803095ea99ad230d0e54",
+  "position": {
+    "x": 40.204450509330748,
+    "y": 645.23240085706414,
+    "z": 10000,
+    "height": 67.661148418141991,
+    "width": 1212.0170934032392,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Livestock Units & Equivalents"
+                  },
+                  {
+                    "value": " - ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "FAOSTAT Livestock Patterns (faostat.org/en/#data/EK),"
+                  },
+                  {
+                    "value": " https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)",
+                    "textStyle": {},
+                    "url": "https:// https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)"
+                  },
+                  {
+                    "value": " "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Manure Quantities - "
+                  },
+                  {
+                    "value": "https://www.mdpi.com/2311-5629/5/2/27",
+                    "textStyle": {},
+                    "url": "https://www.mdpi.com/2311-5629/5/2/27"
+                  },
+                  {
+                    "value": "; Energy Use per Capita by Country - "
+                  },
+                  {
+                    "value": "(https://ourworldindata.org/grapher/energy-mix)",
+                    "textStyle": {},
+                    "url": "https://(https://ourworldindata.org/grapher/energy-mix)"
+                  },
+                  {
+                    "value": "; "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Manure Energy Potential"
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "- "
+                  },
+                  {
+                    "value": "https://doi.org/10.1016/j.heliyon.2023.e16791",
+                    "textStyle": {
+                      "fontFamily": "Arial, sans-serif",
+                      "fontSize": "11pt",
+                      "textDecoration": "underline",
+                      "color": "#1155cc"
+                    },
+                    "url": "https://doi.org/10.1016/j.heliyon.2023.e16791"
+                  },
+                  {
+                    "value": ", "
+                  },
+                  {
+                    "value": "https://doi.org/10.3389/fenrg.2022.911485",
+                    "textStyle": {
+                      "fontFamily": "Arial, sans-serif",
+                      "fontSize": "11pt",
+                      "textDecoration": "underline",
+                      "color": "#1155cc"
+                    },
+                    "url": "https://doi.org/10.3389/fenrg.2022.911485"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,78 @@
+table energy_per_capita_codes
+	lineageTag: 0716acfb-09ae-4af9-ab77-9db3c1a39285
+
+	column Area
+		dataType: string
+		lineageTag: 770c1d3a-15f2-472d-8f10-bb80fe91fd8b
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f02ea6a-cab4-4d55-b0d3-6cc8e505e20c
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total energy supply'
+		dataType: double
+		lineageTag: 160849f1-87b9-45de-9d92-04cce735bef1
+		summarizeBy: sum
+		sourceColumn: Total energy supply
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total energy supply (Original Year)'
+		dataType: int64
+		formatString: 0
+		lineageTag: a44aa568-d81e-40b8-9ddf-ce4794d8e452
+		summarizeBy: sum
+		sourceColumn: Total energy supply (Original Year)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Area Code (M49)'
+		dataType: string
+		lineageTag: 3288e8d6-9b1a-4098-a784-b402ab08fa2d
+		summarizeBy: none
+		sourceColumn: Area Code (M49)
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: 3b4f0dc7-e40f-4610-b996-34728511b3ce
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition energy_per_capita_codes = m
+		mode: import
+		source =
+				let
+				    Source = Table.NestedJoin(energy_per_capita, {"Area"}, countries, {"Area"}, "countries", JoinKind.LeftOuter),
+				    #"Expanded countries" = Table.ExpandTableColumn(Source, "countries", {"Area", "Area Code (M49)"}, {"countries.Area", "countries.Area Code (M49)"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded countries",{"Area", "countries.Area", "Code", "Year", "Total energy supply", "Total energy supply (Original Year)", "countries.Area Code (M49)"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Reordered Columns","Micronesia (country)","Micronesia (Federated States of)",Replacer.ReplaceText,{"Area"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Micronesia (Federated States of)","Micronesia",Replacer.ReplaceText,{"Area"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Replaced Value1",{"countries.Area"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns1",{{"countries.Area Code (M49)", "Area Code (M49)"}}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Renamed Columns","Congo","Congo (Republic of the)",Replacer.ReplaceValue,{"Area"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value2", each ([#"Area Code (M49)"] <> null))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

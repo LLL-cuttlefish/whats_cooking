@@ -4,10 +4,10 @@
   "position": {
     "x": 219.00025460409063,
     "y": 84.5873999264477,
-    "z": 8,
+    "z": 2000,
     "height": 608.33404056691847,
     "width": 460.0164078191745,
-    "tabOrder": 8
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "azureMap",
@@ -161,42 +161,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "e6c1f279458c8c43451d",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "livestock"
-              }
-            },
-            "Property": "Area"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "1b05ae9f65033a99da62",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "livestock"
-                  }
-                },
-                "Property": "Value"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
